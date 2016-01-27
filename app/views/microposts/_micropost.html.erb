@@ -1,0 +1,16 @@
+<li id="micropost-<%= micropost.id %>">
+	<div class="userPic"><%= link_to gravatar_for(micropost.user), micropost.user %></div>
+	<div class="userContent">
+	<span class="user"><%= link_to micropost.user.name, micropost.user %></span>
+	<span class="content">
+		<%= micropost.content %>
+		<%= image_tag micropost.picture.url, class: :userPic if micropost.picture? %>
+	</span>
+	<span>
+		Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+		<% if current_user?(micropost.user) %>
+			<%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
+		<% end %>
+	</span>
+	</div>
+</li>
